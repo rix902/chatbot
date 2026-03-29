@@ -7,7 +7,7 @@ st.set_page_config(page_title="LLaMA Chat", page_icon="🦙", layout="wide")
 
 st.title("🦙 LLaMA Chat (Local Ollama)")
 
-# Sidebar settings
+# Sidebar
 
 with st.sidebar:
 st.header("⚙ Settings")
@@ -20,25 +20,26 @@ max_tokens = st.slider("Max Tokens", 50, 1024, 512)
 if "messages" not in st.session_state:
 st.session_state.messages = []
 
-# Display chat
+# Show previous messages
 
 for msg in st.session_state.messages:
 with st.chat_message(msg["role"]):
 st.markdown(msg["content"])
 
-# Input
+# Input box
 
 prompt = st.chat_input("Type your message...")
 
 if prompt:
+# Show user message
 st.session_state.messages.append({"role": "user", "content": prompt})
+with st.chat_message("user"):
+st.markdown(prompt)
 
 ```
-with st.chat_message("user"):
-    st.markdown(prompt)
-
+# Generate response
 with st.chat_message("assistant"):
-    response_box = st.empty()
+    response_placeholder = st.empty()
 
     try:
         res = requests.post(
@@ -55,12 +56,13 @@ with st.chat_message("assistant"):
         )
 
         data = res.json()
-        reply = data.get("response", "No response")
+        reply = data.get("response", "⚠ No response from model")
 
     except Exception as e:
         reply = f"❌ Error: {e}"
 
-    response_box.markdown(reply)
+    response_placeholder.markdown(reply)
 
+# Save assistant response
 st.session_state.messages.append({"role": "assistant", "content": reply})
 ```
