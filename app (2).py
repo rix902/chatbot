@@ -211,8 +211,8 @@ with st.sidebar:
 st.markdown(
     f"""
     <div class="title-bar">
-        <div class="icon">🦙</div>
-        <h1>LLaMA Chat</h1>
+        <div class="icon">🌸</div>
+        <h1>swastik Chat</h1>
         <div class="badge">Groq · {model}</div>
     </div>
     """,
