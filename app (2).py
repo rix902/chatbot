@@ -4,7 +4,7 @@ from groq import Groq
 # ── Page config ──────────────────────────────────────────────────
 st.set_page_config(
     page_title="swastik Chat",
-    page_icon="🌸🌺🌻🌷🌼💐🌹",
+    page_icon="🌸",
     layout="centered",
 )
 
